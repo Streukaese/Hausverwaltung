@@ -1,0 +1,90 @@
+﻿namespace Hausverwaltung
+{
+    partial class Hauptfenster
+    {
+        /// <summary>
+        /// Erforderliche Designervariable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Verwendete Ressourcen bereinigen.
+        /// </summary>
+        /// <param name="disposing">True, wenn verwaltete Ressourcen gelöscht werden sollen; andernfalls False.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Vom Windows Form-Designer generierter Code
+
+        /// <summary>
+        /// Erforderliche Methode für die Designerunterstützung.
+        /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.listBoxHaeuser = new System.Windows.Forms.ListBox();
+            this.labelHaeuser = new System.Windows.Forms.Label();
+            this.buttonNeu = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // listBoxHaeuser
+            // 
+            this.listBoxHaeuser.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.listBoxHaeuser.FormattingEnabled = true;
+            this.listBoxHaeuser.ItemHeight = 16;
+            this.listBoxHaeuser.Location = new System.Drawing.Point(12, 88);
+            this.listBoxHaeuser.Name = "listBoxHaeuser";
+            this.listBoxHaeuser.Size = new System.Drawing.Size(268, 324);
+            this.listBoxHaeuser.TabIndex = 0;
+            this.listBoxHaeuser.DoubleClick += new System.EventHandler(this.listBoxHaeuser_DoubleClick);
+            // 
+            // labelHaeuser
+            // 
+            this.labelHaeuser.AutoSize = true;
+            this.labelHaeuser.Location = new System.Drawing.Point(46, 69);
+            this.labelHaeuser.Name = "labelHaeuser";
+            this.labelHaeuser.Size = new System.Drawing.Size(39, 16);
+            this.labelHaeuser.TabIndex = 1;
+            this.labelHaeuser.Text = "Haus";
+            // 
+            // buttonNeu
+            // 
+            this.buttonNeu.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.buttonNeu.Location = new System.Drawing.Point(139, 62);
+            this.buttonNeu.Name = "buttonNeu";
+            this.buttonNeu.Size = new System.Drawing.Size(141, 23);
+            this.buttonNeu.TabIndex = 2;
+            this.buttonNeu.Text = "Neues Haus";
+            this.buttonNeu.UseVisualStyleBackColor = false;
+            this.buttonNeu.Click += new System.EventHandler(this.buttonNeu_Click);
+            // 
+            // Hauptfenster
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonNeu);
+            this.Controls.Add(this.labelHaeuser);
+            this.Controls.Add(this.listBoxHaeuser);
+            this.Name = "Hauptfenster";
+            this.Text = "Hauptfenster";
+            this.Load += new System.EventHandler(this.Hauptfenster_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ListBox listBoxHaeuser;
+        private System.Windows.Forms.Label labelHaeuser;
+        private System.Windows.Forms.Button buttonNeu;
+    }
+}
+
