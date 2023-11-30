@@ -101,5 +101,42 @@ namespace Hausverwaltung
             command.ExecuteNonQuery();
             Datenbank.Close();
         }
+
+        // Wohnungen des ausgewählten Hauses
+        List<Wohnungen> wohnungen = new List<Wohnungen>();
+        private void AddWohnung(Wohnungen w)
+        {
+            wohnungen.Add(w);
+            listBoxWohnungen.Items.Clear();
+        }
+        private void listBoxHaeuser_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Liste leeren
+            wohnungen.Clear();
+            listBoxWohnungen.Items.Clear();
+            //
+            int index = listBoxHaeuser.SelectedIndex;
+            if(index < 0 || index >= haeuser.Count)
+            {
+                return;
+            }
+
+            Haus h = haeuser[index];
+            Datenbank.Open();
+            MySqlCommand cmd = Datenbank.CreateCommand();
+            cmd.CommandText = "SELECT id, haus_id, tuer, wohnflaeche FROM wohnungen WHERE haus_id=" + h.Id;
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                long id = reader.GetInt64(0);
+                long haus_id = reader.GetInt64(1);
+                string tuer = reader.GetString(2);
+                long wohnflaeche = reader.GetInt64(3);
+                AddWohnung(new Haus(id, haus_id, tuer, wohnflaeche));
+            }
+            reader.Close();
+
+            Datenbank.Close();
+        }
     }
 }

@@ -31,6 +31,8 @@
             this.listBoxHaeuser = new System.Windows.Forms.ListBox();
             this.labelHaeuser = new System.Windows.Forms.Label();
             this.buttonNeu = new System.Windows.Forms.Button();
+            this.listBoxWohnungen = new System.Windows.Forms.ListBox();
+            this.labelWohnungen = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBoxHaeuser
@@ -42,6 +44,7 @@
             this.listBoxHaeuser.Name = "listBoxHaeuser";
             this.listBoxHaeuser.Size = new System.Drawing.Size(268, 324);
             this.listBoxHaeuser.TabIndex = 0;
+            this.listBoxHaeuser.SelectedIndexChanged += new System.EventHandler(this.listBoxHaeuser_SelectedIndexChanged);
             this.listBoxHaeuser.DoubleClick += new System.EventHandler(this.listBoxHaeuser_DoubleClick);
             // 
             // labelHaeuser
@@ -64,11 +67,31 @@
             this.buttonNeu.UseVisualStyleBackColor = false;
             this.buttonNeu.Click += new System.EventHandler(this.buttonNeu_Click);
             // 
+            // listBoxWohnungen
+            // 
+            this.listBoxWohnungen.FormattingEnabled = true;
+            this.listBoxWohnungen.ItemHeight = 16;
+            this.listBoxWohnungen.Location = new System.Drawing.Point(374, 88);
+            this.listBoxWohnungen.Name = "listBoxWohnungen";
+            this.listBoxWohnungen.Size = new System.Drawing.Size(240, 324);
+            this.listBoxWohnungen.TabIndex = 3;
+            // 
+            // labelWohnungen
+            // 
+            this.labelWohnungen.AutoSize = true;
+            this.labelWohnungen.Location = new System.Drawing.Point(406, 69);
+            this.labelWohnungen.Name = "labelWohnungen";
+            this.labelWohnungen.Size = new System.Drawing.Size(99, 20);
+            this.labelWohnungen.TabIndex = 4;
+            this.labelWohnungen.Text = "Wohnungen";
+            // 
             // Hauptfenster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelWohnungen);
+            this.Controls.Add(this.listBoxWohnungen);
             this.Controls.Add(this.buttonNeu);
             this.Controls.Add(this.labelHaeuser);
             this.Controls.Add(this.listBoxHaeuser);
@@ -85,6 +108,8 @@
         private System.Windows.Forms.ListBox listBoxHaeuser;
         private System.Windows.Forms.Label labelHaeuser;
         private System.Windows.Forms.Button buttonNeu;
+        private System.Windows.Forms.ListBox listBoxWohnungen;
+        private System.Windows.Forms.Label labelWohnungen;
     }
 }
 
