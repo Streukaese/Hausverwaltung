@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Hausverwaltung
 {
-    public class Wohnungen
+    public class Wohnung
     {
         public long Id { get; }
         public long HausId { get; }
         public string Tuer { get; set; }
         public long Wohnflaeche { get; set; }
 
-        public Wohnungen(long id, long hausId, string tuer, int wohnflaeche)
+        public Wohnung(long id, long hausId, string tuer, long wohnflaeche)
         {
             Id = id;
             HausId = hausId;

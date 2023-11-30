@@ -103,11 +103,11 @@ namespace Hausverwaltung
         }
 
         // Wohnungen des ausgewählten Hauses
-        List<Wohnungen> wohnungen = new List<Wohnungen>();
-        private void AddWohnung(Wohnungen w)
+        List<Wohnung> wohnungen = new List<Wohnung>();
+        private void AddWohnung(Wohnung w)
         {
             wohnungen.Add(w);
-            listBoxWohnungen.Items.Clear();
+            listBoxWohnungen.Items.Add(w.ToString());
         }
         private void listBoxHaeuser_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -132,11 +132,15 @@ namespace Hausverwaltung
                 long haus_id = reader.GetInt64(1);
                 string tuer = reader.GetString(2);
                 long wohnflaeche = reader.GetInt64(3);
-                AddWohnung(new Haus(id, haus_id, tuer, wohnflaeche));
+                AddWohnung(new Wohnung(id, haus_id, tuer, wohnflaeche));
             }
             reader.Close();
 
             Datenbank.Close();
+
+        /*
+         * 
+         */
         }
     }
 }

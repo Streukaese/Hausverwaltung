@@ -114,7 +114,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wohnungen.cs" />
+    <Compile Include="Wohnung.cs" />
     <EmbeddedResource Include="Hauptfenster.resx">
       <DependentUpon>Hauptfenster.cs</DependentUpon>
     </EmbeddedResource>
