@@ -33,6 +33,7 @@
             this.buttonNeu = new System.Windows.Forms.Button();
             this.listBoxWohnungen = new System.Windows.Forms.ListBox();
             this.labelWohnungen = new System.Windows.Forms.Label();
+            this.buttonNeuWohnung = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxHaeuser
@@ -50,7 +51,7 @@
             // labelHaeuser
             // 
             this.labelHaeuser.AutoSize = true;
-            this.labelHaeuser.Location = new System.Drawing.Point(46, 69);
+            this.labelHaeuser.Location = new System.Drawing.Point(12, 62);
             this.labelHaeuser.Name = "labelHaeuser";
             this.labelHaeuser.Size = new System.Drawing.Size(39, 16);
             this.labelHaeuser.TabIndex = 1;
@@ -59,7 +60,7 @@
             // buttonNeu
             // 
             this.buttonNeu.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.buttonNeu.Location = new System.Drawing.Point(139, 62);
+            this.buttonNeu.Location = new System.Drawing.Point(139, 55);
             this.buttonNeu.Name = "buttonNeu";
             this.buttonNeu.Size = new System.Drawing.Size(141, 23);
             this.buttonNeu.TabIndex = 2;
@@ -75,21 +76,34 @@
             this.listBoxWohnungen.Name = "listBoxWohnungen";
             this.listBoxWohnungen.Size = new System.Drawing.Size(240, 324);
             this.listBoxWohnungen.TabIndex = 3;
+            this.listBoxWohnungen.SelectedIndexChanged += new System.EventHandler(this.listBoxWohnungen_SelectedIndexChanged);
             // 
             // labelWohnungen
             // 
             this.labelWohnungen.AutoSize = true;
-            this.labelWohnungen.Location = new System.Drawing.Point(406, 69);
+            this.labelWohnungen.Location = new System.Drawing.Point(371, 62);
             this.labelWohnungen.Name = "labelWohnungen";
-            this.labelWohnungen.Size = new System.Drawing.Size(99, 20);
+            this.labelWohnungen.Size = new System.Drawing.Size(79, 16);
             this.labelWohnungen.TabIndex = 4;
             this.labelWohnungen.Text = "Wohnungen";
+            // 
+            // buttonNeuWohnung
+            // 
+            this.buttonNeuWohnung.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.buttonNeuWohnung.Location = new System.Drawing.Point(473, 59);
+            this.buttonNeuWohnung.Name = "buttonNeuWohnung";
+            this.buttonNeuWohnung.Size = new System.Drawing.Size(141, 23);
+            this.buttonNeuWohnung.TabIndex = 5;
+            this.buttonNeuWohnung.Text = "Neue Wohnung";
+            this.buttonNeuWohnung.UseVisualStyleBackColor = false;
+            this.buttonNeuWohnung.Click += new System.EventHandler(this.buttonNeuWohnung_Click);
             // 
             // Hauptfenster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonNeuWohnung);
             this.Controls.Add(this.labelWohnungen);
             this.Controls.Add(this.listBoxWohnungen);
             this.Controls.Add(this.buttonNeu);
@@ -110,6 +124,7 @@
         private System.Windows.Forms.Button buttonNeu;
         private System.Windows.Forms.ListBox listBoxWohnungen;
         private System.Windows.Forms.Label labelWohnungen;
+        private System.Windows.Forms.Button buttonNeuWohnung;
     }
 }
 

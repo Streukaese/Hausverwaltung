@@ -20,39 +20,54 @@ namespace Hausverwaltung
         }
 
         List <Haus> haeuser = new List<Haus>();
+        // Wohnungen des ausgewählten Hauses
+        List<Wohnung> wohnungen = new List<Wohnung>();
         private void AddHaus(Haus h) 
         {
             haeuser.Add(h);                                             // Dient dazu "Haus h = " zu sparen und "AddHaus" zu nutzen
             listBoxHaeuser.Items.Add(h.ToString());
         }
+        private void AddWohnung(Wohnung w)
+        {
+            wohnungen.Add(w);
+            listBoxWohnungen.Items.Add(w.ToString());
+        }
         private void Hauptfenster_Load(object sender, EventArgs e)
         {
             Datenbank.Open();
-            MySqlCommand cmd = Datenbank.CreateCommand();
-            cmd.CommandText = "SELECT id, adresse, plz, ort FROM haus;";
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while(reader.Read())
+            MySqlCommand cmdHaus = Datenbank.CreateCommand();
+            cmdHaus.CommandText = "SELECT id, adresse, plz, ort FROM haus;";
+            MySqlDataReader readerHaus = cmdHaus.ExecuteReader();
+            while(readerHaus.Read())
             {
-                int id = reader.GetInt16(0);
-                string adresse = reader.GetString(1);
-                string plz = reader.GetString(2);
-                string ort = reader.GetString(3);
+                int id = readerHaus.GetInt16(0);
+                string adresse = readerHaus.GetString(1);
+                string plz = readerHaus.GetString(2);
+                string ort = readerHaus.GetString(3);
 
                 AddHaus(new Haus(id, adresse, plz, ort));
-                /*                                                      // Die Funktion "AddHaus" übernimmt folgende Zeilen:
-                haeuser.Add(h);
-                listBoxHaeuser.Items.Add(h.ToString());
-                */
+                                                                            /* Die Funktion "AddHaus" übernimmt folgende Zeilen:
+                                                                            haeuser.Add(h);
+                                                                            listBoxHaeuser.Items.Add(h.ToString());
+                                                                             */
             }
-            reader.Close();
+            readerHaus.Close();
+
+            MySqlCommand cmdWohnung = Datenbank.CreateCommand();
+            cmdWohnung.CommandText = "SELECT id, haus_id, tuer, wohnflaeche FROM wohnungen;";
+            MySqlDataReader readerWohnung = cmdWohnung.ExecuteReader();
+            while (readerWohnung.Read())
+            {
+                long id = readerWohnung.GetInt64(0);
+                long hausId = readerWohnung.GetInt64(1);
+                string tuer = readerWohnung.GetString(2);
+                long wohnflaeche = readerWohnung.GetInt64(3);
+
+                AddWohnung(new Wohnung(id, hausId, tuer, wohnflaeche));
+            }
+            readerWohnung.Close();
 
             Datenbank.Close();
-            /* Testdaten
-            AddHaus(new Haus(1, "Juliusstr. 2", "12345", "Berlin"));
-            AddHaus(new Haus(1, "Juliusstr. 5", "12345", "Berlin"));
-            AddHaus(new Haus(1, "Karl-Marx-Str. 27", "12345", "Berlin"));
-            */
-            // TODO Daten aus der Datenbank laden
         }
 
         private void buttonNeu_Click(object sender, EventArgs e)
@@ -63,6 +78,22 @@ namespace Hausverwaltung
                 return;
             }
             AddHaus(dialog.Haus);
+        }
+        private void buttonNeuWohnung_Click(object sender, EventArgs e)
+        {
+            WohnungBearbeiten dialog = new WohnungBearbeiten(null);
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            AddWohnung(dialog.Wohnung);
+            /* Versuch Label
+            int index = listBoxHaeuser.SelectedIndex;
+            if (index > 0)
+            {
+                WohnungBearbeiten.labelHaus.Text = "" + punkte + " Punkte";
+            }
+            */
         }
 
         private void listBoxHaeuser_DoubleClick(object sender, EventArgs e)
@@ -102,13 +133,6 @@ namespace Hausverwaltung
             Datenbank.Close();
         }
 
-        // Wohnungen des ausgewählten Hauses
-        List<Wohnung> wohnungen = new List<Wohnung>();
-        private void AddWohnung(Wohnung w)
-        {
-            wohnungen.Add(w);
-            listBoxWohnungen.Items.Add(w.ToString());
-        }
         private void listBoxHaeuser_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Liste leeren
@@ -141,6 +165,11 @@ namespace Hausverwaltung
         /*
          * 
          */
+        }
+
+        private void listBoxWohnungen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

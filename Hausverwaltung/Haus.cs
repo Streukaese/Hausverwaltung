@@ -9,6 +9,8 @@ namespace Hausverwaltung
 {
     public class Haus
     {
+        internal static long id;
+
         public long Id { get; }
         public string Adresse { get; set; }
         public string Plz { get; set; }
