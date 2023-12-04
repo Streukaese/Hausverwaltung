@@ -19,6 +19,8 @@ namespace Hausverwaltung
             InitializeComponent();
         }
 
+        Haus ausgewaehltesHaus = null;
+
         List <Haus> haeuser = new List<Haus>();
         // Wohnungen des ausgewählten Hauses
         List<Wohnung> wohnungen = new List<Wohnung>();
@@ -81,13 +83,20 @@ namespace Hausverwaltung
         }
         private void buttonNeuWohnung_Click(object sender, EventArgs e)
         {
-            WohnungBearbeiten dialog = new WohnungBearbeiten(null);
+            if(ausgewaehltesHaus == null)
+            {
+                listBoxHaeuser.Focus();
+                return;
+            }
+            WohnungBearbeiten dialog = new WohnungBearbeiten(ausgewaehltesHaus, null);
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
-            AddWohnung(dialog.Wohnung);
-            /* Versuch Label
+            Wohnung neueWohnung = dialog.Wohnung;
+            wohnungen.Add(neueWohnung);
+            listBoxWohnungen.Items.Add(neueWohnung.ToString());
+            /* TODO - Versuch Label
             int index = listBoxHaeuser.SelectedIndex;
             if (index > 0)
             {
@@ -142,10 +151,21 @@ namespace Hausverwaltung
             int index = listBoxHaeuser.SelectedIndex;
             if(index < 0 || index >= haeuser.Count)
             {
+                labelWohnungen.Text = "(Kein haus ausgewählt)";
+                wohnungen = new List<Wohnung>();
                 return;
             }
 
             Haus h = haeuser[index];
+            ausgewaehltesHaus = h;
+            labelWohnungen.Text = "Wohnungen der" + h.Adresse;
+            wohnungen = h.WohnungenLaden();
+            foreach(Wohnung w in wohnungen)
+            {
+                listBoxWohnungen.Items.Add(w.ToString());
+            }
+
+            /*                                                  // In "WohnungenLaden" ausgelagern in Klasse "Haus"
             Datenbank.Open();
             MySqlCommand cmd = Datenbank.CreateCommand();
             cmd.CommandText = "SELECT id, haus_id, tuer, wohnflaeche FROM wohnungen WHERE haus_id=" + h.Id;
@@ -161,15 +181,24 @@ namespace Hausverwaltung
             reader.Close();
 
             Datenbank.Close();
-
-        /*
-         * 
-         */
+                              */
         }
 
-        private void listBoxWohnungen_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBoxWohnungen_DoubleClick(object sender, EventArgs e)
         {
-
+            int index = listBoxWohnungen.SelectedIndex;
+            if(index < 0 || index >= wohnungen.Count)
+            {
+                listBoxWohnungen.Focus();
+                return;
+            }
+            Wohnung w = wohnungen[index];
+            WohnungBearbeiten dialog = new WohnungBearbeiten(ausgewaehltesHaus, w);
+            if(dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            listBoxWohnungen.Items[index] = w.ToString();
         }
     }
 }

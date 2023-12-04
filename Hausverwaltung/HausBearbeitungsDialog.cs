@@ -61,6 +61,15 @@ namespace Hausverwaltung
             }
             else
             {
+                Datenbank.Open();
+                MySqlCommand cmd = Datenbank.CreateCommand();
+                cmd.CommandText = "UPDATE `haus` SET `adresse` = @adresse, `plz` = @plz, `ort` = @ort WHERE `haus`.`id` = @id";
+                cmd.Parameters.AddWithValue("adresse", adresse);
+                cmd.Parameters.AddWithValue("plz", plz);
+                cmd.Parameters.AddWithValue("ort", ort);
+                cmd.Parameters.AddWithValue("id", Haus.Id);
+                cmd.Prepare();          
+                cmd.ExecuteNonQuery();
                 // TODO "UPDATE haus SET ... WHERE id =" + Haus.id
                 Haus.Adresse= adresse;
                 Haus.Plz= plz;

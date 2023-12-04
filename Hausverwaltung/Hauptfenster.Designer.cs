@@ -76,7 +76,7 @@
             this.listBoxWohnungen.Name = "listBoxWohnungen";
             this.listBoxWohnungen.Size = new System.Drawing.Size(240, 324);
             this.listBoxWohnungen.TabIndex = 3;
-            this.listBoxWohnungen.SelectedIndexChanged += new System.EventHandler(this.listBoxWohnungen_SelectedIndexChanged);
+            this.listBoxWohnungen.DoubleClick += new System.EventHandler(this.listBoxWohnungen_DoubleClick);
             // 
             // labelWohnungen
             // 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -28,6 +29,27 @@ namespace Hausverwaltung
         public override string ToString()
         {
             return Adresse + " " + Plz;
+        }
+
+        public List<Wohnung> WohnungenLaden()
+        {
+            List<Wohnung> wohnungen = new List<Wohnung>();
+            Datenbank.Open();
+            MySqlCommand cmd = Datenbank.CreateCommand();
+            cmd.CommandText = "SELECT id, haus_id, tuer, wohnflaeche FROM wohnungen WHERE haus_id=" + Id;
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                long id = reader.GetInt64(0);
+                long haus_id = reader.GetInt64(1);
+                string tuer = reader.GetString(2);
+                long wohnflaeche = reader.GetInt64(3);
+                wohnungen.Add(new Wohnung(id, haus_id, tuer, wohnflaeche));
+            }
+            reader.Close();
+
+            Datenbank.Close();
+            return wohnungen;
         }
     }
 }

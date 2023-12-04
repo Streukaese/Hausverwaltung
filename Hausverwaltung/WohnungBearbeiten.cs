@@ -14,51 +14,66 @@ namespace Hausverwaltung
 {
     public partial class WohnungBearbeiten : Form
     {
-        public WohnungBearbeiten(Wohnung wohnung)
+        Haus Haus { get; }
+        public Wohnung Wohnung { get; set; }
+        public WohnungBearbeiten(Haus haus, Wohnung wohnung)
         {
+            Haus = haus;
+            //labelHaus.Text = haus.ToString();
             Wohnung = wohnung;
             InitializeComponent();
             if (wohnung != null)
             {
                 textBoxTuer.Text = wohnung.Tuer;
-                textBoxWohnflaeche.Text = wohnung.Wohnflaeche.ToString();
+                numericUpDownWohnflaeche.Value = wohnung.Wohnflaeche; 
+                //textBoxWohnflaeche.Text = wohnung.Wohnflaeche.ToString();
             }
         }
-        
-        public Wohnung Wohnung {  get; set; }
 
         private void buttonSpeichern_Click(object sender, EventArgs e)
         {
             string tuer = textBoxTuer.Text;
-            if(string.IsNullOrEmpty(tuer))
+            if(tuer.Length == 0)                //(string.IsNullOrEmpty(tuer))
             {
                 textBoxTuer.Focus();
                 return;
             }
-            long wohnflaeche;
-            if(!long.TryParse(textBoxWohnflaeche.Text, out wohnflaeche))
+
+            // long wohnflaeche;
+            long wohnflaeche = (long)numericUpDownWohnflaeche.Value;
+            if(wohnflaeche <= 0)//(!long.TryParse(textBoxWohnflaeche.Text, out wohnflaeche))
             {
-                textBoxWohnflaeche.Focus();
+                //textBoxWohnflaeche.Focus();
+                numericUpDownWohnflaeche.Focus();
                 return;
             }
-
             if (Wohnung == null)
             {
                 Datenbank.Open();
                 MySqlCommand command = Datenbank.CreateCommand();
-                //  command.Parameters.AddWithValue("haus_id", Haus.id);
                 command.CommandText = "INSERT INTO wohnungen (id, haus_id, tuer, wohnflaeche) VALUES (NULL, @haus_id, @tuer, @wohnflaeche)";
+                command.Parameters.AddWithValue("haus_id", Haus.Id);
                 command.Parameters.AddWithValue("tuer", tuer);
                 command.Parameters.AddWithValue("wohnflaeche", wohnflaeche);
+                command.Prepare();          // 
                 command.ExecuteNonQuery();
                 long id = command.LastInsertedId;
-                long hausId = id;
+                //long hausId = id;
                 Datenbank.Close();
 
-                Wohnung = new Wohnung(id, hausId, tuer, wohnflaeche);
+                Wohnung = new Wohnung(id, Haus.Id, tuer, wohnflaeche);
             }
             else
             {
+                Datenbank.Open();
+                MySqlCommand cmd = Datenbank.CreateCommand();
+                cmd.CommandText = "";
+                cmd.Parameters.AddWithValue("tuer", tuer);
+                cmd.Parameters.AddWithValue("wohnflaeche", wohnflaeche);
+                cmd.Parameters.AddWithValue("id", Wohnung.Id);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                Datenbank.Close();
                 // TODO "UPDATE haus SET ... WHERE id =" + Haus.id
                 Wohnung.Tuer = tuer;
                 Wohnung.Wohnflaeche = wohnflaeche;

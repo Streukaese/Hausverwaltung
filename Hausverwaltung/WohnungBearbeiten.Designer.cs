@@ -35,6 +35,8 @@
             this.labelHaus = new System.Windows.Forms.Label();
             this.buttonSpeichern = new System.Windows.Forms.Button();
             this.buttonAbbrechen = new System.Windows.Forms.Button();
+            this.numericUpDownWohnflaeche = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWohnflaeche)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTuer
@@ -74,13 +76,13 @@
             this.labelHaus.AutoSize = true;
             this.labelHaus.Location = new System.Drawing.Point(108, 59);
             this.labelHaus.Name = "labelHaus";
-            this.labelHaus.Size = new System.Drawing.Size(44, 16);
+            this.labelHaus.Size = new System.Drawing.Size(47, 16);
             this.labelHaus.TabIndex = 4;
-            this.labelHaus.Text = "label3";
+            this.labelHaus.Text = "(Haus)";
             // 
             // buttonSpeichern
             // 
-            this.buttonSpeichern.Location = new System.Drawing.Point(111, 175);
+            this.buttonSpeichern.Location = new System.Drawing.Point(111, 227);
             this.buttonSpeichern.Name = "buttonSpeichern";
             this.buttonSpeichern.Size = new System.Drawing.Size(177, 59);
             this.buttonSpeichern.TabIndex = 5;
@@ -90,7 +92,7 @@
             // 
             // buttonAbbrechen
             // 
-            this.buttonAbbrechen.Location = new System.Drawing.Point(111, 240);
+            this.buttonAbbrechen.Location = new System.Drawing.Point(111, 292);
             this.buttonAbbrechen.Name = "buttonAbbrechen";
             this.buttonAbbrechen.Size = new System.Drawing.Size(177, 59);
             this.buttonAbbrechen.TabIndex = 6;
@@ -98,11 +100,19 @@
             this.buttonAbbrechen.UseVisualStyleBackColor = true;
             this.buttonAbbrechen.Click += new System.EventHandler(this.buttonAbbrechen_Click);
             // 
+            // numericUpDownWohnflaeche
+            // 
+            this.numericUpDownWohnflaeche.Location = new System.Drawing.Point(111, 176);
+            this.numericUpDownWohnflaeche.Name = "numericUpDownWohnflaeche";
+            this.numericUpDownWohnflaeche.Size = new System.Drawing.Size(177, 22);
+            this.numericUpDownWohnflaeche.TabIndex = 7;
+            // 
             // WohnungBearbeiten
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(300, 450);
+            this.Controls.Add(this.numericUpDownWohnflaeche);
             this.Controls.Add(this.buttonAbbrechen);
             this.Controls.Add(this.buttonSpeichern);
             this.Controls.Add(this.labelHaus);
@@ -112,6 +122,7 @@
             this.Controls.Add(this.labelTuer);
             this.Name = "WohnungBearbeiten";
             this.Text = "Wohnung Bearbeiten";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWohnflaeche)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,5 +137,6 @@
         private System.Windows.Forms.Label labelHaus;
         private System.Windows.Forms.Button buttonSpeichern;
         private System.Windows.Forms.Button buttonAbbrechen;
+        private System.Windows.Forms.NumericUpDown numericUpDownWohnflaeche;
     }
 }
